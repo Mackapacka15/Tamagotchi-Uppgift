@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Net;
+using System.Collections.Generic;
 using System;
 
 namespace Tamagotchi_Uppgift
@@ -62,12 +63,29 @@ namespace Tamagotchi_Uppgift
                         {
                             startNew = true;
                         }
-                        else
+
+                    }
+
+                    Console.Clear();
+                }
+                players.RemoveAll(t => !t.GetAlive());
+                if (players.Count == 0)
+                {
+                    Console.WriteLine("All tamagotchis are dead do you want to stop playing?");
+                    svar = Console.ReadLine().ToLower();
+                    if (svar == "yes")
+                    {
+                        playing = false;
+                    }
+                    else
+                    {
+                        Console.WriteLine("Do you want to start another tamagotchi?");
+                        svar = Console.ReadLine().ToLower();
+                        if (svar == "yes")
                         {
-                            playing = false;
+                            startNew = true;
                         }
                     }
-                    Console.Clear();
                 }
 
                 if (startNew)
@@ -84,7 +102,6 @@ namespace Tamagotchi_Uppgift
             Console.WriteLine("What is your new tamagotchis name?");
             tamagotchi.name = Console.ReadLine();
             tamagotchis.Add(tamagotchi);
-            tamagotchis.RemoveAll(t => !t.GetAlive());
             return tamagotchis;
         }
 
