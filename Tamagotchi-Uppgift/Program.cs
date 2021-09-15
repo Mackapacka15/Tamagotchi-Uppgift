@@ -100,8 +100,13 @@ namespace Tamagotchi_Uppgift
             {
                 tamagotchis.Remove(item);
             }
+
+            //tamagotchis.RemoveAll(t => !t.GetAlive());
+
             return tamagotchis;
         }
+
+
 
     }
 }

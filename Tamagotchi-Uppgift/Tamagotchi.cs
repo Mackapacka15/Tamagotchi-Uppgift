@@ -18,7 +18,14 @@ namespace Tamagotchi_Uppgift
         }
         public void Hi()
         {
-            Console.WriteLine(words[generator.Next(0, words.Count)]);
+            if (words.Count != 0)
+            {
+                Console.WriteLine(words[generator.Next(0, words.Count)]);
+            }
+            else
+            {
+                Console.WriteLine(name + " doesn't know any words");
+            }
             ReduceBoredom();
         }
         public void Teach(string w)
