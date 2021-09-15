@@ -20,7 +20,7 @@ namespace Tamagotchi_Uppgift
         {
             if (words.Count != 0)
             {
-                Console.WriteLine(words[generator.Next(0, words.Count)]);
+                Console.WriteLine(words[generator.Next(-1, words.Count)]);
             }
             else
             {

@@ -62,6 +62,10 @@ namespace Tamagotchi_Uppgift
                         {
                             startNew = true;
                         }
+                        else
+                        {
+                            playing = false;
+                        }
                     }
                     Console.Clear();
                 }
@@ -72,9 +76,6 @@ namespace Tamagotchi_Uppgift
                     startNew = false;
                 }
             }
-            Console.ReadLine();
-
-
         }
 
         static List<Tamagotchi> New(List<Tamagotchi> tamagotchis)
@@ -83,26 +84,7 @@ namespace Tamagotchi_Uppgift
             Console.WriteLine("What is your new tamagotchis name?");
             tamagotchi.name = Console.ReadLine();
             tamagotchis.Add(tamagotchi);
-            tamagotchis = Clear(tamagotchis);
-            return tamagotchis;
-        }
-        static List<Tamagotchi> Clear(List<Tamagotchi> tamagotchis)
-        {
-            List<Tamagotchi> remove = new List<Tamagotchi>();
-            foreach (Tamagotchi item in tamagotchis)
-            {
-                if (!item.GetAlive())
-                {
-                    remove.Add(item);
-                }
-            }
-            foreach (Tamagotchi item in remove)
-            {
-                tamagotchis.Remove(item);
-            }
-
-            //tamagotchis.RemoveAll(t => !t.GetAlive());
-
+            tamagotchis.RemoveAll(t => !t.GetAlive());
             return tamagotchis;
         }
 
