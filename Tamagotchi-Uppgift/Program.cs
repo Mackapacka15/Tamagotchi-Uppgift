@@ -50,6 +50,8 @@ namespace Tamagotchi_Uppgift
                         else if (svar == "5" || svar == "Start another Tamagotchi")
                         {
                             startNew = true;
+                            item.Tick();
+                            break;
                         }
 
                         item.Tick();
@@ -65,11 +67,11 @@ namespace Tamagotchi_Uppgift
                         }
 
                     }
-
+                    Console.ReadLine();
                     Console.Clear();
                 }
                 players.RemoveAll(t => !t.GetAlive());
-                if (players.Count == 0)
+                if (players.Count == 0 && !startNew)
                 {
                     Console.WriteLine("All tamagotchis are dead do you want to stop playing?");
                     svar = Console.ReadLine().ToLower();
