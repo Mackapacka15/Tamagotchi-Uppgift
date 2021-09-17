@@ -16,13 +16,13 @@ namespace Tamagotchi_Uppgift
 
             while (playing)
             {
-                foreach (Tamagotchi item in players)
+                for (int i = players.Count - 1; i >= 0 && startNew == true; i--)
                 {
 
-                    if (item.GetAlive())
+                    if (players[i].GetAlive())
                     {
-                        item.PrintStats();
-                        Console.WriteLine("What do you want to do width " + item.name + "?");
+                        players[i].PrintStats();
+                        Console.WriteLine("What do you want to do width " + players[i].name + "?");
                         Console.WriteLine("1) Teach a new word ");
                         Console.WriteLine("2) Greet it");
                         Console.WriteLine("3) Feed it");
@@ -32,17 +32,17 @@ namespace Tamagotchi_Uppgift
 
                         if (svar == "1" || svar == "Teach a new word")
                         {
-                            Console.WriteLine("What word do you want to teach " + item.name);
+                            Console.WriteLine("What word do you want to teach " + players[i].name);
                             string word = Console.ReadLine();
-                            item.Teach(word);
+                            players[i].Teach(word);
                         }
                         else if (svar == "2" || svar == "Greet it")
                         {
-                            item.Hi();
+                            players[i].Hi();
                         }
                         else if (svar == "3" || svar == "Feed it")
                         {
-                            item.Feed();
+                            players[i].Feed();
                         }
                         else if (svar == "4" || svar == "Nothing")
                         {
@@ -50,15 +50,14 @@ namespace Tamagotchi_Uppgift
                         else if (svar == "5" || svar == "Start another Tamagotchi")
                         {
                             startNew = true;
-                            item.Tick();
-                            break;
+                            players[i].Tick();
                         }
 
-                        item.Tick();
+                        players[i].Tick();
                     }
                     else
                     {
-                        Console.WriteLine(item.name + " just died");
+                        Console.WriteLine(players[i].name + " just died");
                         Console.WriteLine("Do you want to start another tamagotchi?");
                         svar = Console.ReadLine();
                         if (svar == "Yes")
