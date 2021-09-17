@@ -1,4 +1,5 @@
-﻿using System.Net;
+﻿using System.Runtime.ConstrainedExecution;
+using System.Net;
 using System.Collections.Generic;
 using System;
 
@@ -9,14 +10,14 @@ namespace Tamagotchi_Uppgift
         static void Main(string[] args)
         {
             string svar = "";
-            bool startNew = false;
             bool playing = true;
             List<Tamagotchi> players = new List<Tamagotchi>();
             players = New(players);
 
             while (playing)
             {
-                for (int i = players.Count - 1; i >= 0 && startNew == true; i--)
+
+                for (int i = 0; i < players.Count; i++)
                 {
 
                     if (players[i].GetAlive())
@@ -49,28 +50,17 @@ namespace Tamagotchi_Uppgift
                         }
                         else if (svar == "5" || svar == "Start another Tamagotchi")
                         {
-                            startNew = true;
-                            players[i].Tick();
+                            players = New(players);
                         }
 
                         players[i].Tick();
                     }
-                    else
-                    {
-                        Console.WriteLine(players[i].name + " just died");
-                        Console.WriteLine("Do you want to start another tamagotchi?");
-                        svar = Console.ReadLine();
-                        if (svar == "Yes")
-                        {
-                            startNew = true;
-                        }
-
-                    }
+                    Console.WriteLine("Press enter to continue");
                     Console.ReadLine();
                     Console.Clear();
                 }
                 players.RemoveAll(t => !t.GetAlive());
-                if (players.Count == 0 && !startNew)
+                if (players.Count <= 0)
                 {
                     Console.WriteLine("All tamagotchis are dead do you want to stop playing?");
                     svar = Console.ReadLine().ToLower();
@@ -84,15 +74,9 @@ namespace Tamagotchi_Uppgift
                         svar = Console.ReadLine().ToLower();
                         if (svar == "yes")
                         {
-                            startNew = true;
+                            players = New(players);
                         }
                     }
-                }
-
-                if (startNew)
-                {
-                    players = New(players);
-                    startNew = false;
                 }
             }
         }
@@ -105,8 +89,5 @@ namespace Tamagotchi_Uppgift
             tamagotchis.Add(tamagotchi);
             return tamagotchis;
         }
-
-
-
     }
 }

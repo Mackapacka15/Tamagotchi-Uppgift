@@ -15,6 +15,7 @@ namespace Tamagotchi_Uppgift
         public void Feed()
         {
             hunger += generator.Next(0, 3);
+            hunger = Math.Min(10, hunger);
         }
         public void Hi()
         {
@@ -44,9 +45,12 @@ namespace Tamagotchi_Uppgift
         }
         public void PrintStats()
         {
+            Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(name + ":");
+            Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("Food = " + hunger);
             Console.WriteLine("Boredom = " + boredom);
+            Console.ForegroundColor = ConsoleColor.White;
             Console.WriteLine();
             if (isAlive)
             {
@@ -63,7 +67,8 @@ namespace Tamagotchi_Uppgift
         }
         private void ReduceBoredom()
         {
-            boredom++;
+            boredom += generator.Next(0, 5);
+            boredom = Math.Min(10, boredom);
         }
 
 
